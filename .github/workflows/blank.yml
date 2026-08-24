@@ -2,10 +2,11 @@ name: Hourly Auto Commit
 
 on:
   schedule:
-    # Runs at minute 0 past every hour
-    - cron: '0 * * * *'
-  # Allows you to trigger the workflow manually from the Actions tab
+  # Runs at minute 0 past every hour
+  - cron: '0 * * * *'
+  # Allows manual runs from the Actions tab
   workflow_dispatch:
+
 
 permissions:
   contents: write
@@ -14,19 +15,19 @@ jobs:
   auto-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v5
 
-      - name: Create or update dummy file
-        run: |
-          echo "Automated commit at $(date)" >> commit_log.txt
+    - name: Create or update dummy file
+      run: |
+        echo "Automated commit at $(date)" >> commit_log.txt
 
-      - name: Commit and push changes
-        run: |
-          # Replace with the email tied to your GitHub account!
-          git config --global user.email "oscaratefgranadaaboultaif10@gmail.com"
-          git config --global user.name "Oscar Atef Granada"
-          
-          git add commit_log.txt
-          git commit -m "chore: auto-commit $(date)" || echo "No changes to commit"
-          git push
+    - name: Commit and push changes
+      run: |
+        # Replace with the email tied to your GitHub account!
+        git config --global user.email "oscaratefgranadaaboultaif10@gmail.com"
+        git config --global user.name "Oscar Atef Granada"
+
+        git add commit_log.txt
+        git commit -m "chore: auto-commit $(date)" || echo "No changes to commit"
+        git push
